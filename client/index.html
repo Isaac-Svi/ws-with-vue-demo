@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
+    <body>
+        <div id="app">
+            <div
+                class="card"
+                v-for="({id, sender, text}) of messages"
+                :key="`msg-${id}`"
+                @click="showName(name)"
+            >
+                <span class="sender">{{ sender }}</span>
+                <span>{{ text }}</span>
+            </div>
+            <form @submit.prevent="sendMsg">
+                <input type="text" v-model="msg" />
+            </form>
+        </div>
+
+        <script>
+            // connect to socket server
+            const socket = new WebSocket('ws://localhost:8080');
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    username: prompt("what's your name?"),
+                    messages: [],
+                    msg: '',
+                },
+                methods: {
+                    showName(name) {
+                        window.alert(name);
+                    },
+                    sendMsg() {
+                        const newMsg = {
+                            id: Math.random(),
+                            sender: this.username,
+                            text: this.msg,
+                        };
+                        socket.send(
+                            JSON.stringify({ event: 'msg', msg: newMsg })
+                        );
+                        this.msg = '';
+                    },
+                },
+                mounted() {
+                    socket.addEventListener('message', (data) => {
+                        const { event, msg } = JSON.parse(data.data);
+                        this.messages.push(msg);
+                    });
+                },
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+#app {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    min-height: 300px;
+    box-shadow: 0 4px 8px -3px rgb(0 0 0/ 20%), 0 8px 16px -5px rgb(0 0 0 / 10%);
+    border-radius: 5px;
+}
+
+.card {
+    margin: 5px 0;
+    box-shadow: 0 0 2px rgb(0 0 0 / 10%);   
+    border-radius: 5px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 600;
+    padding: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background-color: lightblue;
+    box-shadow: 0 4px 8px -3px rgb(0 0 0/ 20%), 0 8px 16px -5px rgb(0 0 0 / 10%);
+}
+
+.sender {
+    border-radius: 20px;
+    padding: 10px;
+    background: blue;
+    color: white;
+}

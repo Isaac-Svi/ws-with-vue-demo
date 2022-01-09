@@ -1,0 +1,27 @@
+
+const obj = {
+    data: {
+        users: [
+            {
+                id: 1,
+                isCool: false,
+                name: {
+                    first: 'Bob',
+                    last: 'Jones',
+                },
+            },
+        ],
+    },
+};
+
+const [
+    {
+        id,
+        isCool,
+        name: { first, last },
+    },
+] = obj.data.users;
+
+var id = obj.data.users[0].id;
+var isCool = obj.data.users[0].isCool;
+var name = obj.data.users[0].name;
